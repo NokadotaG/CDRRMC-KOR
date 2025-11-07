@@ -3,7 +3,7 @@ name: 🚀 Deploy Laravel to InfinityFree (MySQL Ready)
 on:
   push:
     branches:
-      - main  # or 'master' if that’s your main branch
+      - main  # or 'master' if your repo uses master
 
 jobs:
   deploy:
@@ -11,11 +11,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout the repository
+      # Step 1: Checkout your code
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Step 2: Set up PHP environment
+      # Step 2: Setup PHP (for Laravel)
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
@@ -23,7 +23,7 @@ jobs:
           extensions: mbstring, bcmath, intl, pdo, mysql
           coverage: none
 
-      # Step 3: Install Composer dependencies (no dev)
+      # Step 3: Install dependencies
       - name: Install Composer dependencies
         run: |
           composer install --no-dev --optimize-autoloader
@@ -36,7 +36,7 @@ jobs:
           php artisan view:clear
           php artisan optimize
 
-      # Step 5: Prepare deployment files
+      # Step 5: Prepare files for deployment
       - name: Prepare deployment files
         run: |
           echo "Preparing files for deployment..."
@@ -45,12 +45,12 @@ jobs:
           cp -r vendor deploy/
           if [ -f .env ]; then cp .env deploy/; fi
 
-      # Step 6: Deploy to InfinityFree via FTP
-      - name: Deploy to InfinityFree
+      # Step 6: Deploy to InfinityFree using FTP
+      - name: 🚀 Deploy to InfinityFree
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           server: ftpupload.net
-          username: ${{ secrets.INFINITYFREE_FTP_USERNAME }}
+          username: if0_40356497
           password: ${{ secrets.INFINITYFREE_FTP_PASSWORD }}
           server-dir: /htdocs/
           local-dir: deploy/
