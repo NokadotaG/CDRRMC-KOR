@@ -51,7 +51,7 @@ jobs:
         with:
           server: ftpupload.net
           username: if0_40356497
-          password: ${{ secrets.INFINITYFREE_FTP_PASSWORD }}
+          password: ${{ secrets.FTP_PASSWORD }}
           server-dir: /htdocs/
           local-dir: deploy/
           exclude: |
