@@ -1,9 +1,9 @@
-name: 🚀 Deploy Laravel to InfinityFree
+name: 🚀 Deploy Laravel to InfinityFree (MySQL Ready)
 
 on:
   push:
     branches:
-      - main  # or "master" if that’s your main branch
+      - main  # or 'master' if that’s your main branch
 
 jobs:
   deploy:
@@ -11,9 +11,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Step 1: Checkout the repository
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # Step 2: Set up PHP environment
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
@@ -21,24 +23,30 @@ jobs:
           extensions: mbstring, bcmath, intl, pdo, mysql
           coverage: none
 
-      - name: Install Composer dependencies (no dev)
+      # Step 3: Install Composer dependencies (no dev)
+      - name: Install Composer dependencies
         run: |
           composer install --no-dev --optimize-autoloader
+
+      # Step 4: Optimize Laravel for production
+      - name: Optimize Laravel
+        run: |
           php artisan config:clear
-          php artisan cache:clear
           php artisan route:clear
           php artisan view:clear
+          php artisan optimize
 
+      # Step 5: Prepare deployment files
       - name: Prepare deployment files
         run: |
           echo "Preparing files for deployment..."
           mkdir deploy
           cp -r app bootstrap config database public resources routes storage artisan composer.json composer.lock deploy/
           cp -r vendor deploy/
-          # Copy Laravel .env file if stored in repo or create one manually
           if [ -f .env ]; then cp .env deploy/; fi
 
-      - name: Deploy to InfinityFree via FTP
+      # Step 6: Deploy to InfinityFree via FTP
+      - name: Deploy to InfinityFree
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           server: ftpupload.net
