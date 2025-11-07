@@ -1,0 +1,483 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'calibri', sans-serif;
+}
+body{
+    background-image: url('/img/background.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    flex: 1;
+}
+
+.elements{
+    display: flex;
+    flex: 1;
+    margin-top: 60px;
+    height: calc(100vh - 60px);
+}
+select{
+    padding: 5px;
+    border-radius: 5px;
+    border-color: #ccc;
+}
+.date{
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+.card1{
+    border: 1px solid #ccc;
+
+}
+textarea{
+    padding: 10px;
+}
+
+/* ########################################## NAVIGATION TOP ################################################## */
+
+.nav-header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 65px;
+    background-image:linear-gradient(to top, #2969f4, #afc3f5);
+    display: flex;
+    box-shadow: 0px 0px 10px #000;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1000;
+}
+
+ul li{
+    list-style: none;
+    margin-right: 100px;
+    margin-top:10px;
+}
+ul li a{  
+    color: black;
+    font-weight: bold;
+    padding: 20px 20px;
+    margin-top: -10px;
+    transition: ease 0.5s;
+}
+
+ul li a:hover{  
+    color: white;
+    text-decoration: none;
+}
+ul li a i{  
+    padding: 10px;
+}
+
+.navdrop ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.navdrop .dropdown {
+    display: none;
+    position: absolute;
+    background: white;
+    box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+    padding: 10px;
+    border-radius: 6px;
+    margin-top: 5px;
+    z-index: 9999;
+}
+.navdrop .dropdown li{
+    border-bottom: 1px solid gray;
+    width: 100%;
+}
+.navdrop .dropdown button{
+    border: none;
+    background-color: transparent;
+    padding: 5px;
+    font-weight: bold;
+    transition: ease 0.5s;
+}
+.navdrop .dropdown button:hover{
+    color: #4a7cff;
+}
+
+.navdrop .dropdown-parent {
+    position: relative;
+}
+
+.navdrop .dropdown-parent.active .dropdown {
+    display: block;
+}
+.upper{
+    position: fixed;
+    display: flex;
+    z-index: 1;
+    align-items: center ;
+    width: 100%;
+    box-sizing: border-box;
+    background-image:linear-gradient(to right, #fff,  #ddf0f8 );
+    margin-left: -35px;
+    padding-left: 35px;
+    margin-top:-20px;
+}
+.upper button{
+    margin: 10px;
+}
+.title{
+    margin-left:20px;
+    margin-top: 10px;
+}
+
+
+/* ########################################## NAVIGATION SIDE ################################################## */
+.nav-side{
+    position: fixed;
+    top: 60px;
+    left: 0;
+    width: 250px;
+    height: calc(100vh - 60px);
+    backdrop-filter: blur(10px);
+    box-shadow: 0px 10px 5px #2969f4;
+    padding: 20px;
+    
+}
+
+nav{
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    margin-right: 10px;   
+    font-size: 18px;
+    margin-left: -10px;
+    gap: 3px;    
+}
+nav a{
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
+    transition: ease 0.3s;
+    padding: 15px;
+}
+nav a i{
+    padding:7px;
+}
+nav a:hover{
+    color: white;
+    background-image: linear-gradient(to right, #2969f4, #afc3f5); ;
+    text-decoration: none;
+    text-shadow: 0px 0px 2px #000;
+    border-radius: 10px;
+}
+nav a.active{
+    color: white;
+    background-image: linear-gradient(to right, #2969f4, #afc3f5); ;
+    text-decoration: none;
+    text-shadow: 0px 0px 2px #000;
+    border-radius: 10px;
+}
+
+/* ########################################## MAIN CONTENT ################################################## */
+
+.main-content{
+    margin-left: 250px;
+    padding: 30px;
+    flex: 1;
+    overflow-y: auto;
+}
+.container{
+    width:100%;
+}
+.header{
+    margin-top: -20px;
+    width: 100%;
+    top:0;
+    width: 100%;
+    z-index: 1;
+    background-image: linear-gradient(to top, #afc3f5,  #fff);
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #0d6efd;
+    border-radius: 10px;
+}
+.header::after {
+    content: '';
+    display: block;
+    height: 1px;
+    background-color: #ddd;
+}
+.header h1{
+    font-weight:bold;
+}
+.add-search{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* ############################################# pagination ######################################################### */
+
+.pagination {
+    display: flex;
+    justify-content: center;  /* centers the paginator */
+    align-items: center;      /* vertically centers items */
+    flex-wrap: wrap;          /* ensures no overflow on small screens */
+    gap: 2px;                 /* minimal spacing between buttons */
+    margin: 15px auto;        /* centers within container */
+    padding: 0;
+}
+
+.pagination .page-item {
+    list-style: none;
+    margin: 0 !important;
+}
+
+.pagination .page-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 28px;          /* ensures same button width */
+    height: 28px;             /* keeps consistent height */
+    padding: 0 !important;
+    font-size: 0.8rem !important;
+    border-radius: 4px !important;
+    border: 1px solid #dee2e6 !important;
+    color: #0d6efd !important;
+    background-color: #fff !important;
+    transition: all 0.2s ease-in-out;
+}
+
+.pagination .page-link:hover {
+    background-color: #0d6efd !important;
+    color: #fff !important;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #0d6efd !important;
+    color: #fff !important;
+    border-color: #0d6efd !important;
+}
+
+.pagination .page-item.disabled .page-link {
+    color: #adb5bd !important;
+    background-color: #f8f9fa !important;
+}
+
+/* Optional - make arrows a bit smaller */
+.pagination .page-link svg,
+.pagination .page-link i {
+    font-size: 0.75rem !important;
+}
+
+/* --- COMPRESSED TABS --- */
+.nav-tabs {
+    margin-top: 5px !important;
+    border-bottom: 1px solid #dee2e6;
+    gap: 0 !important; /* remove any spacing */
+}
+
+/* Remove Bootstrap's spacing between items */
+.nav-tabs .nav-item {
+    margin-right: 0 !important;
+}
+
+/* Compact, clean-looking tabs */
+.nav-tabs .nav-link {
+    border: none !important;
+    border-radius: 6px 6px 0 0;
+    background-color: #e9ecef;
+    padding: 6px 14px;
+    color: #495057;
+    transition: all 0.2s ease;
+}
+
+/* Remove blue focus/outline */
+.nav-tabs .nav-link:focus,
+.nav-tabs .nav-link:active {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Active tab – flat look (no highlight border) */
+.nav-tabs .nav-link.active {
+    background-color: #ffffff !important;
+    color: #0d6efd !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* Hover effect for a subtle visual cue */
+.nav-tabs .nav-link:hover {
+    background-color: #f8f9fa !important;
+    color: #0d6efd !important;
+}
+/* ########################################## CREATE STYLES ################################################## */
+
+.container {
+    max-width: 1100px;
+    margin: 30px auto;
+    padding: 20px;
+}
+
+.header h1 {
+    font-weight: 700;
+    font-size: 2rem;
+    color: #222;
+}
+
+.text-muted {
+    font-size: 0.95rem;
+}
+
+/* ========== Card Section ========== */
+.card1 {
+    background: #fff;
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.card {
+    background: #fafafa;
+    padding: 25px;
+    border-radius: 12px;
+}
+
+/* ========== Buttons ========== */
+.upper {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 15px;
+}
+
+.btn-back {
+    background: #6c757d;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    font-size: 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+.btn-back:hover {
+    background: #5a6268;
+}
+
+/* ========== Form Grid ========== */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #333;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group input[type="file"] {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 15px;
+    transition: all 0.2s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(0,123,255,0.2);
+}
+
+.form-group span {
+    color: #dc3545;
+    font-size: 0.9rem;
+    margin-top: 4px;
+}
+
+/* ========== Form Buttons ========== */
+.form-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 25px;
+}
+
+.btn-submit {
+    background: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+.btn-submit:hover {
+    background: #0056b3;
+}
+
+.btn-cancel {
+    background: #dc3545;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+.btn-cancel:hover {
+    background: #c82333;
+}
+
+/* ========== Alerts ========== */
+.alert {
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    color: #842029;
+    border: 1px solid #f5c2c7;
+}
+
+.alert-success {
+    background-color: #d1e7dd;
+    color: #0f5132;
+    border: 1px solid #badbcc;
+}
+
+/* ========== Responsive ========== */
+@media (max-width: 600px) {
+    .header h1 {
+        font-size: 1.6rem;
+        text-align: left;
+    }
+    .form-buttons {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .btn-submit, .btn-cancel {
+        width: 100%;
+    }
+}
+
+
+

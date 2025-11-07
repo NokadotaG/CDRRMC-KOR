@@ -1,0 +1,56 @@
+name: 🚀 Deploy Laravel to InfinityFree
+
+on:
+  push:
+    branches:
+      - main  # or "master" if that’s your main branch
+
+jobs:
+  deploy:
+    name: Upload via FTP
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: mbstring, bcmath, intl, pdo, mysql
+          coverage: none
+
+      - name: Install Composer dependencies (no dev)
+        run: |
+          composer install --no-dev --optimize-autoloader
+          php artisan config:clear
+          php artisan cache:clear
+          php artisan route:clear
+          php artisan view:clear
+
+      - name: Prepare deployment files
+        run: |
+          echo "Preparing files for deployment..."
+          mkdir deploy
+          cp -r app bootstrap config database public resources routes storage artisan composer.json composer.lock deploy/
+          cp -r vendor deploy/
+          # Copy Laravel .env file if stored in repo or create one manually
+          if [ -f .env ]; then cp .env deploy/; fi
+
+      - name: Deploy to InfinityFree via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ftpupload.net
+          username: if0_40356497
+          password: ${{ secrets.INFINITYFREE_FTP_PASSWORD }}
+          server-dir: /htdocs/
+          local-dir: deploy/
+          exclude: |
+            **/.git*
+            **/.github*
+            node_modules/**
+            tests/**
+            storage/framework/cache/**
+            storage/framework/sessions/**
+            storage/framework/views/**
